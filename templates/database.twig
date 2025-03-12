@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База данных</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        select { padding: 5px; margin-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+    <script>
+        function changeTable() {
+            let selectedTable = document.getElementById("tableSelect").value;
+            window.location.href = "/database?table=" + selectedTable;
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Выбери таблицу:</h2>
+    <select id="tableSelect" onchange="changeTable()">
+        {% for table in tables %}
+        <option value="{{ table }}" {% if table == selected_table %}selected{% endif %}>{{ table }}</option>
+        {% endfor %}
+    </select>
+
+    {% if selected_table == "films" %}
+        <h2>Фильмы</h2>
+        <table>
+            <tr><th>ID</th><th>Название</th><th>Рейтинг</th><th>Бюджет</th></tr>
+            {% for film in data %}
+            <tr>
+                <td>{{ film.film_id }}</td>
+                <td>{{ film.film_name }}</td>
+                <td>{{ film.film_rating }}</td>
+                <td>{{ film.film_budget }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    {% elif selected_table == "genres" %}
+        <h2>Жанры</h2>
+        <table>
+            <tr><th>ID</th><th>Название</th></tr>
+            {% for genre in data %}
+            <tr><td>{{ genre.genre_id }}</td><td>{{ genre.genre_name }}</td></tr>
+            {% endfor %}
+        </table>
+
+    {% elif selected_table == "languages" %}
+        <h2>Языки</h2>
+        <table>
+            <tr><th>ID</th><th>Язык</th></tr>
+            {% for language in data %}
+            <tr><td>{{ language.language_id }}</td><td>{{ language.language_name }}</td></tr>
+            {% endfor %}
+        </table>
+
+    {% elif selected_table == "actors" %}
+        <h2>Актёры</h2>
+        <table>
+            <tr><th>ID</th><th>Имя</th></tr>
+            {% for actor in data %}
+            <tr><td>{{ actor.actor_id }}</td><td>{{ actor.actor_name }}</td></tr>
+            {% endfor %}
+        </table>
+
+    {% elif selected_table == "cast" %}
+        <h2>Связи (Cast)</h2>
+        <table>
+            <tr><th>ID Фильма</th><th>ID Актёра</th></tr>
+            {% for c in data %}
+            <tr><td>{{ c.film_id }}</td><td>{{ c.actor_id }}</td></tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+</body>
+</html>
