@@ -44,8 +44,38 @@ def create_app():
                 .group_by(Language.language_name)
                 .all()),
 
+            "max_rating_by_language": ("Максимальный рейтинг фильмов по языку", 
+                db.session.query(Language.language_name, func.max(Film.film_rating))
+                .join(Film)
+                .group_by(Language.language_name)
+                .all()),
+
+            "min_rating_by_language": ("Минимальный рейтинг фильмов по языку", 
+                db.session.query(Language.language_name, func.min(Film.film_rating))
+                .join(Film)
+                .group_by(Language.language_name)
+                .all()),
+
             "most_expensive_film": ("Самый дорогой фильм в каждом жанре", 
                 db.session.query(Genre.genre_name, Film.film_name, func.max(Film.film_budget))
+                .join(Film)
+                .group_by(Genre.genre_name)
+                .all()),
+            
+            "avg_rating_by_genre": ("Средний рейтинг фильмов по жанру", 
+                db.session.query(Genre.genre_name, func.avg(Film.film_rating))
+                .join(Film)
+                .group_by(Genre.genre_name)
+                .all()),
+
+            "max_rating_by_genre": ("Максимальный рейтинг фильмов по жанру", 
+                db.session.query(Genre.genre_name, func.max(Film.film_rating))
+                .join(Film)
+                .group_by(Genre.genre_name)
+                .all()),
+
+            "min_rating_by_genre": ("Минимальный рейтинг фильмов по жанру", 
+                db.session.query(Genre.genre_name, func.min(Film.film_rating))
                 .join(Film)
                 .group_by(Genre.genre_name)
                 .all()),

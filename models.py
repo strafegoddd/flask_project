@@ -23,6 +23,11 @@ class Film(db.Model):
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), nullable=False)
     language_id = db.Column(db.Integer, db.ForeignKey('languages.language_id'), nullable=False)
 
+    # Отношения
+    genre = db.relationship('Genre', backref='films')
+    language = db.relationship('Language', backref='films')
+    actors = db.relationship('Actor', secondary='cast', backref='films')
+
 # Таблица Актёры
 class Actor(db.Model):
     __tablename__ = 'actors'

@@ -23,7 +23,12 @@
     <select id="querySelect" onchange="updateQuery()">
         <option value="genre_counts" {% if selected_query == "genre_counts" %}selected{% endif %}>Количество фильмов в каждом жанре</option>
         <option value="avg_rating_by_language" {% if selected_query == "avg_rating_by_language" %}selected{% endif %}>Средний рейтинг фильмов по языку</option>
+        <option value="max_rating_by_language" {% if selected_query == "max_rating_by_language" %}selected{% endif %}>Максимальный рейтинг фильмов по языку</option>
+        <option value="min_rating_by_language" {% if selected_query == "min_rating_by_language" %}selected{% endif %}>Минимальный рейтинг фильмов по языку</option>
         <option value="most_expensive_film" {% if selected_query == "most_expensive_film" %}selected{% endif %}>Самый дорогой фильм в каждом жанре</option>
+        <option value="avg_rating_by_genre" {% if selected_query == "avg_rating_by_genre" %}selected{% endif %}>Средний рейтинг фильмов по жанру</option>
+        <option value="max_rating_by_genre" {% if selected_query == "max_rating_by_genre" %}selected{% endif %}>Максимальный рейтинг фильмов по жанру</option>
+        <option value="min_rating_by_genre" {% if selected_query == "min_rating_by_genre" %}selected{% endif %}>Минимальный рейтинг фильмов по жанру</option>
         <option value="actors_per_film" {% if selected_query == "actors_per_film" %}selected{% endif %}>Количество актеров в каждом фильме</option>
         <option value="avg_budget_by_genre" {% if selected_query == "avg_budget_by_genre" %}selected{% endif %}>Средний бюджет фильмов по жанру</option>
     </select>
